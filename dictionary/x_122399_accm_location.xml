@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="cmn_location" label="Location" max_length="40" name="x_122399_accm_location" type="collection">
+        <element hint="Atos Standortkürzel" label="Code" mandatory="true" max_length="40" name="code" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element default="true" label="Active" max_length="40" name="status" type="boolean"/>
+    </element>
+</database>
