@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>active</field>
+        <global>true</global>
+        <messages/>
+        <name>DB937</name>
+        <order/>
+        <script><![CDATA[function onSubmit() {
+   if(g_form.getValue('db_937_identifier').indexOf("937")!=3/*||g_form.getValue('dasid').lenght!=8*/){
+	   g_form.addErrorMessage("DB 937 Identifier ist falsch! Bitte überprüfen");
+	   return false;
+   }
+	return true;//Type appropriate comment here, and begin script below
+   
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-06-29 08:56:41</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>fc0c409fdb23320039def6fdbf9619a9</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>DB937</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ACCM" source="x_122399_accm">aa7ef65ddbf6320039def6fdbf961916</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="ACCM">aa7ef65ddbf6320039def6fdbf961916</sys_scope>
+        <sys_update_name>sys_script_client_fc0c409fdb23320039def6fdbf9619a9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-06-29 08:57:36</sys_updated_on>
+        <table>x_122399_accm_employee</table>
+        <type>onSubmit</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

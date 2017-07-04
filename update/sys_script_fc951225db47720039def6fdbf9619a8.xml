@@ -13,10 +13,12 @@
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
         <collection>x_122399_accm_employee</collection>
-        <condition>current.is_manager==true</condition>
+        <condition/>
         <description/>
         <execute_function>false</execute_function>
-        <filter_condition/>
+        <filter_condition table="x_122399_accm_employee">is_managerVALCHANGES^EQ<item endquery="false" field="is_manager" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
         <is_rest>false</is_rest>
         <message/>
         <name>isManager</name>
@@ -29,17 +31,72 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	if(current.is_manager.changesTo(true)){
 		var role2 = new GlideRecord('sys_user_role');
 		role2.get("name", "x_122399_accm.Manager");//x_122399_accm.Manager
-		var userrole = new GlideRecord('sys_user_has_role');
-		userrole.user = current.sys_id;
-		userrole.role = role2.sys_id;
-		userrole.insert();
-		var gs = new GlideRecord('sys_user_group');
-		gs.name=current.name;
-		gs.manager=current.sys_id;
-		gs.description="Meine Mitarbeiter";
-		gs.insert();
+			var userrole = new GlideRecord('sys_user_has_role');
+				userrole.user = current.getValue('sys_id');
+				userrole.role = role2.getValue('sys_id');
+				userrole.insert();
+					var temp = new GlideRecord('sys_user_role');
+						temp.get('name',"x_122399_accm.Leser");
+				userrole.addQuery('user',current.getValue('sys_id'));
+				userrole.addQuery('role',temp.getValue('sys_id'));
+				userrole.query();
+				if(userrole.next()){userrole.deleteRecord();}
+				
+// 					var ge = new GlideRecord('sys_user_group');
+// 						ge.name=current.name;
+// 						ge.manager=current.sys_id;
+// 						ge.description="Meine Mitarbeiter";
+// 						ge.insert();
+// 						current.mitarbeiter = ge.getValue('sys_id');
+// 						current.update();
+						//current.mitarbeiter = ge.getValue('sys_id');
+						//current.setValue("mitarbeiter",ge.getValue('sys_id'));
+	}
+	if(current.is_manager.changesFrom(true)){
+		var certificationRole = new GlideRecord("sys_user_role");
+		// If Certification role exists
+		if(!current.deputy_user.nil()){
+			gs.addInfoMessage(current.deputy_user);
+			current.setValue('deputy_user',null);
+			current.deputy_user.setDisplayValue("");
+			current.update();
+			gs.addInfoMessage(current.deputy_user);
+// 			var deputy = new GlideRecord('x_122399_accm_employee');
+// 				deputy.get('sys_id',current.deputy_user);
+// 				deputy.update();
+			
+		}
+		if (certificationRole.get("name", "x_122399_accm.Manager")) {
+			var temp2 = new GlideRecord('sys_user_role');
+				temp2.get('name',"x_122399_accm.Leser");
+			var hasRole = new GlideRecord('sys_user_has_role');
+				hasRole.user=current.getValue('sys_id');
+				hasRole.role=temp2.getValue('sys_id');
+				hasRole.insert();
+			hasRole.addQuery('user', current.getValue('sys_id'));
+			hasRole.addQuery('role', certificationRole.getValue('sys_id'));
+			hasRole.query();
+			if(hasRole.next()){
+				hasRole.deleteMultiple();
+			}
+			
+				var gt = new GlideRecord('x_122399_accm_employee');
+					gt.addQuery('manager',current.sys_id);
+					gt.query();
+					while(gt.next()){
+						gt.manager = '';
+						gt.update();
+					}
+// 					var go = new GlideRecord('sys_user_group');
+// 						go.get("manager",current.getValue('sys_id'));
+// 						go.deleteRecord();
+						gs.addErrorMessage("Alle die diese Person als Manager hatten haben nun keinen Manager mehr! Bitte neu setzten!");
+		
+		}
+	}
 })(current, previous);
 ]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -49,7 +106,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>fc951225db47720039def6fdbf9619a8</sys_id>
-        <sys_mod_count>111</sys_mod_count>
+        <sys_mod_count>139</sys_mod_count>
         <sys_name>isManager</sys_name>
         <sys_overrides/>
         <sys_package display_value="ACCM" source="x_122399_accm">aa7ef65ddbf6320039def6fdbf961916</sys_package>
@@ -58,7 +115,7 @@
         <sys_scope display_value="ACCM">aa7ef65ddbf6320039def6fdbf961916</sys_scope>
         <sys_update_name>sys_script_fc951225db47720039def6fdbf9619a8</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-06-08 08:47:23</sys_updated_on>
+        <sys_updated_on>2017-06-27 12:14:31</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

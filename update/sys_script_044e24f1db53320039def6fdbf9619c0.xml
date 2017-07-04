@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>false</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_122399_accm_employee</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_122399_accm_employee">managerVALCHANGES^EQ<item endquery="false" field="manager" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Nicht Meins</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	if(current.manager.changesFrom('')){
+		var gt=new GlideRecord('sys_user_group');
+		gt.get("manager",current.getValue('manager'));
+			var gp=new GlideRecord('sys_user_grmember');
+			gp.group=gt.getValue('sys_id');
+			gp.user=current.getValue('sys_id');
+			gp.insert();
+	}
+	else {
+		var gu = new GlideRecord('x_122399_accm_employee');
+		gu.addQuery('is_manager',true);
+		gu.query();
+		while(gu.next()){
+			if(current.manager.changesFrom(gu.sys_id)){
+				var gm=new GlideRecord('sys_user_group');
+				gm.get("manager",gu.getValue('sys_id'));
+					var	gr=new GlideRecord('sys_user_grmember');
+					gr.addQuery('user',current.getValue('sys_id'));
+					gr.addQuery('group',gm.getValue('sys_id'));
+					gr.query();
+				if(gr.next()){
+					gr.deleteRecord();
+					if(current.manager.changesTo('')){return;}
+						var letzte = new GlideRecord('sys_user_group');
+						letzte.get('manager',current.manager.sys_id);
+							gr.group = letzte.getValue('sys_id');
+							gr.user = current.getValue('sys_id');
+							gr.insert();
+							return;
+						
+					}
+					
+				}
+			}
+		}
+					})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-06-12 09:24:18</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>044e24f1db53320039def6fdbf9619c0</sys_id>
+        <sys_mod_count>51</sys_mod_count>
+        <sys_name>Nicht Meins</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ACCM" source="x_122399_accm">aa7ef65ddbf6320039def6fdbf961916</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="ACCM">aa7ef65ddbf6320039def6fdbf961916</sys_scope>
+        <sys_update_name>sys_script_044e24f1db53320039def6fdbf9619c0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-06-20 13:31:02</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=044e24f1db53320039def6fdbf9619c0"/>
+</record_update>

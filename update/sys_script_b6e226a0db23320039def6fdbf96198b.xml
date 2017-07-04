@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>true</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_122399_accm_employee</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_122399_accm_employee">deputy_userVALCHANGES^EQ<item endquery="false" field="deputy_user" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Deputy</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	var role2 = new GlideRecord('sys_user_role');
+	role2.get('name',"x_122399_accm.Deputy");
+	if(current.deputy_user.changesFrom('')){
+		var temp = new GlideRecord('sys_user_has_role');
+		temp.user=current.getValue('deputy_user');
+		temp.role=role2.getValue('sys_id');
+		temp.insert();
+		var temp2 = new GlideRecord('sys_user_role');
+		temp2.get('name',"x_122399_accm.Leser");
+		temp.addQuery('user',current.getValue('deputy_user'));
+		temp.addQuery('role',temp2.getValue('sys_id'));
+		temp.query();
+		if(temp.next()){temp.deleteRecord();}
+		}
+		else {
+			var nope2 = new GlideRecord('x_122399_accm_employee');
+			nope2.addQuery('active',true);
+			nope2.query();
+			while(nope2.next()){
+				if(current.deputy_user.changesFrom(nope2.sys_id)){
+					var nope = new GlideRecord('sys_user_has_role');
+					nope.addQuery('user',nope2.getValue('sys_id'));
+					nope.addQuery('role',role2.getValue('sys_id'));
+					nope.query();
+					if(nope.next()){
+						nope.deleteRecord();
+						gs.addInfoMessage(nope2.getValue('sys_id'));
+						var temp3 = new GlideRecord('sys_user_role');
+						temp3.get('name',"x_122399_accm.Leser");
+						nope.initialize();
+						nope.user=nope2.getValue('sys_id');
+						nope.role=temp3.getValue('sys_id');
+						nope.insert();
+						if(current.deputy_user.changesTo('')){
+							return;
+						}
+						var temp4 = new GlideRecord('sys_user_role');
+						temp4.get('name',"x_122399_accm.Leser");
+						var temp5=new GlideRecord('sys_user_has_role');
+						temp5.addQuery('user',current.getValue('deputy_user'));
+						temp5.addQuery('role',temp4.getValue('sys_id'));
+						temp5.query();
+						if(temp5.next()){temp5.deleteRecord();}
+							nope.initialize();
+							nope.user=current.getValue('deputy_user');
+							nope.role=role2.getValue('sys_id');
+							nope.insert();
+						}
+					}
+				}
+			}
+			// Add your code here
+			
+		})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-06-21 08:00:32</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b6e226a0db23320039def6fdbf96198b</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Deputy</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ACCM" source="x_122399_accm">aa7ef65ddbf6320039def6fdbf961916</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="ACCM">aa7ef65ddbf6320039def6fdbf961916</sys_scope>
+        <sys_update_name>sys_script_b6e226a0db23320039def6fdbf96198b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-06-27 12:46:44</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=b6e226a0db23320039def6fdbf96198b"/>
+</record_update>

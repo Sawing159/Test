@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Division" max_length="40" name="x_122399_accm_division" type="collection">
+        <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Name" mandatory="true" max_length="40" name="name" type="string"/>
+        <element label="Remark" max_length="40" name="remark" type="string"/>
+    </element>
+</database>

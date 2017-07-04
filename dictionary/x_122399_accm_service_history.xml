@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Service History" max_length="40" name="x_122399_accm_service_history" type="collection">
+        <element label="End" max_length="40" name="end" read_only="true" type="glide_date_time"/>
+        <element label="Service" max_length="32" name="service" read_only="true" reference="x_122399_accm_service" type="reference"/>
+        <element label="User" max_length="32" name="user" read_only="true" reference="x_122399_accm_employee" type="reference"/>
+        <index name="index">
+            <element name="service"/>
+        </index>
+        <index name="index2">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

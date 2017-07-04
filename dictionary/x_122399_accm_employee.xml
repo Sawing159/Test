@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
     <element extends="sys_user" label="Employee" max_length="40" name="x_122399_accm_employee" type="collection">
+        <element choice="1" label="Company name" max_length="40" name="company_name" type="choice">
+            <choice>
+                <element label="Test" value="Test"/>
+            </choice>
+        </element>
         <element calculation="&#9;var test = x_122399_accm_employee.dasid;&#13;&#10;&#9;x_122399_accm_employee.user_name=test;// Add your code here&#13;&#10;&#9;" label="DASID" mandatory="true" max_length="7" name="dasid" type="string"/>
+        <element label="DB 937 Identifier" max_length="6" name="db_937_identifier" type="string"/>
+        <element label="DB E-Mail" max_length="100" name="db_e_mail" type="email"/>
+        <element label="Deputy User" max_length="32" name="deputy_user" reference="x_122399_accm_employee" reference_qual="is_manager=false^EQ" reference_qual_condition="is_manager=false^EQ" type="reference"/>
+        <element label="Is Deputy" max_length="40" name="is_deputy" type="boolean"/>
         <element label="Is Manager" max_length="40" name="is_manager" type="boolean"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Service" max_length="32" name="service" reference="x_122399_accm_service" type="reference"/>
+        <index name="index">
+            <element name="service"/>
+        </index>
+        <index name="index2">
+            <element name="deputy_user"/>
+        </index>
     </element>
 </database>
