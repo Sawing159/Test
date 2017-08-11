@@ -21,7 +21,7 @@
         </filter_condition>
         <is_rest>false</is_rest>
         <message/>
-        <name>Deputy</name>
+        <name>Deputy User Rechte zuweisen</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -92,8 +92,8 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>b6e226a0db23320039def6fdbf96198b</sys_id>
-        <sys_mod_count>13</sys_mod_count>
-        <sys_name>Deputy</sys_name>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>Deputy User Rechte zuweisen</sys_name>
         <sys_overrides/>
         <sys_package display_value="ACCM" source="x_122399_accm">aa7ef65ddbf6320039def6fdbf961916</sys_package>
         <sys_policy/>
@@ -101,7 +101,7 @@
         <sys_scope display_value="ACCM">aa7ef65ddbf6320039def6fdbf961916</sys_scope>
         <sys_update_name>sys_script_b6e226a0db23320039def6fdbf96198b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-06-27 12:46:44</sys_updated_on>
+        <sys_updated_on>2017-08-11 13:02:32</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>

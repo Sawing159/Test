@@ -21,7 +21,7 @@
 
 }]]></script_true>
         <set_values/>
-        <short_description>DB Email</short_description>
+        <short_description>DB Email einblenden</short_description>
         <sys_class_name>sys_ui_policy</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-06-29 12:13:30</sys_created_on>
@@ -29,8 +29,8 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>40497897dba3320039def6fdbf961906</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>DB Email</sys_name>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>DB Email einblenden</sys_name>
         <sys_overrides/>
         <sys_package display_value="ACCM" source="x_122399_accm">aa7ef65ddbf6320039def6fdbf961916</sys_package>
         <sys_policy/>
@@ -38,7 +38,7 @@
         <sys_scope display_value="ACCM">aa7ef65ddbf6320039def6fdbf961916</sys_scope>
         <sys_update_name>sys_ui_policy_40497897dba3320039def6fdbf961906</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-06-29 12:13:30</sys_updated_on>
+        <sys_updated_on>2017-08-11 13:15:42</sys_updated_on>
         <table>x_122399_accm_employee</table>
         <ui_type>0</ui_type>
         <view/>

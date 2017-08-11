@@ -19,7 +19,7 @@
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2017-06-28 13:05:58</sys_updated_on>
         <table>x_122399_accm_employee</table>
-        <ui_policy display_value="Test2">c72ab37adba3320039def6fdbf961920</ui_policy>
+        <ui_policy display_value="Firmenname bei Externen einblenden">c72ab37adba3320039def6fdbf961920</ui_policy>
         <visible>true</visible>
     </sys_ui_policy_action>
 </record_update>

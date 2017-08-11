@@ -19,7 +19,7 @@
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2017-06-29 12:14:05</sys_updated_on>
         <table>x_122399_accm_employee</table>
-        <ui_policy display_value="DB Email">40497897dba3320039def6fdbf961906</ui_policy>
+        <ui_policy display_value="DB Email einblenden">40497897dba3320039def6fdbf961906</ui_policy>
         <visible>true</visible>
     </sys_ui_policy_action>
 </record_update>
